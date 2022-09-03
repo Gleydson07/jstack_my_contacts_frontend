@@ -1,4 +1,4 @@
-import React, { useState } from 'React';
+import React, { useState } from 'react';
 import { ContactCard } from '../ContactCard';
 
 import arrowSvg from '../../assets/images/arrow.svg';
@@ -21,13 +21,13 @@ const initContacts = [
   {
     name: 'Gleydson Albuquerque',
     socialMedia: 'link',
-    email: 'gsantos@gmail.com',
+    email: 'gsantos1@gmail.com',
     phone: '(82) 98111-4246'
   },
   {
     name: 'Gleydson Albuquerque',
     socialMedia: 'link',
-    email: 'gsantos@gmail.com',
+    email: 'gsantos2@gmail.com',
     phone: '(82) 98111-4246'
   },
 ]

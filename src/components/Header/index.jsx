@@ -1,9 +1,8 @@
-import React from 'React';
+import React from 'react';
 import logoSvg from '../../assets/images/logo.svg';
 
 import {
-  Container, 
-  InputSearchContainer
+  Container
 } from './styles';
 
 export const Header = () => {
@@ -11,10 +10,6 @@ export const Header = () => {
   return (
     <Container>
       <img src={logoSvg} alt="My Contacts" width={201}/>
-
-      <InputSearchContainer>
-        <input  placeholder='Pesquisar pelo nome...'/>
-      </InputSearchContainer>
     </Container>
   )
 }

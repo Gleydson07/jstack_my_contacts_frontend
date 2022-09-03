@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import editSvg from '../../assets/images/edit.svg';
 import deleteSvg from '../../assets/images/trash.svg';
 
