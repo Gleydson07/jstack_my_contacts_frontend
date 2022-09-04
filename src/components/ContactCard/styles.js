@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link as LinkRRDOM} from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
@@ -40,7 +41,7 @@ export const Button = styled.button`
   margin-left: 8px;
 `
 
-export const Link = styled.a`
+export const Link = styled(LinkRRDOM)`
   display: block;
   text-decoration: none;
   cursor: pointer;

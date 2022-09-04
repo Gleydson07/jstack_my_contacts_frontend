@@ -13,18 +13,21 @@ import {
 
 const initContacts = [
   {
+    id: 1,
     name: 'Gleydson Albuquerque',
     socialMedia: 'link',
     email: 'gsantos@gmail.com',
     phone: '(82) 98111-4246'
   },
   {
+    id: 2,
     name: 'Gleydson Albuquerque',
     socialMedia: 'link',
     email: 'gsantos1@gmail.com',
     phone: '(82) 98111-4246'
   },
   {
+    id: 3,
     name: 'Gleydson Albuquerque',
     socialMedia: 'link',
     email: 'gsantos2@gmail.com',
@@ -39,7 +42,7 @@ export const ContactList = () => {
     <Container>
       <Header>
         <Title>{contacts.length} contatos</Title>
-        <Link href="/">Novo contato</Link>
+        <Link to="/new">Novo contato</Link>
       </Header>
 
       <Body>
@@ -52,7 +55,7 @@ export const ContactList = () => {
 
         {contacts && contacts.map(contact => (
           <ContactCard
-            key={contact.email}
+            key={contact.id}
             contact={contact}
           />
         ))}

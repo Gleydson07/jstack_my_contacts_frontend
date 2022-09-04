@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.section`
-  display: block;
+  display: block;  
+  margin-bottom: 24px;
 
   a{
     display: flex;

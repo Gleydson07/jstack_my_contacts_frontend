@@ -24,10 +24,9 @@ export const ContactCard = ({contact}) => {
         <p>{contact.phone}</p>
       </Wrapper>
       <Settings>
-         <Link>
+         <Link to={`/edit/${contact.id}`}>
           <img src={editSvg} alt="editar" height={22}/>
          </Link>
-
          <Button>
             <img src={deleteSvg} alt="excluir" height={22}/>
          </Button>

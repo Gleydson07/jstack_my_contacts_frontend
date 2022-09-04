@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link as LinkRRDOM} from 'react-router-dom';
 
 export const Container = styled.div`
   width: 100%;
@@ -19,7 +20,7 @@ export const Title = styled.h4`
   line-height: 30px;
   `
 
-export const Link = styled.a`
+export const Link = styled(LinkRRDOM)`
   font-weight: 700;
   text-decoration: none;
   padding: 8px 16px;

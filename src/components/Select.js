@@ -23,4 +23,8 @@ export const Select = styled.select`
       color: #BCBCBC;
     }
   }
+
+  @media(max-width: 450px) {
+    appearance: none;
+  }
 `;
