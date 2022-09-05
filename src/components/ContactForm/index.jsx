@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useErrors from '../../hooks/useErrors';
 import isEmailValid from '../../utils/emailValidate';
+import phoneFormat from '../../utils/phoneFormat';
 
 import { Input } from '../Input';
 import { Select } from '../Select';
@@ -11,7 +12,6 @@ import {
   ButtonContainer,
   Form
 } from './styles';
-import formatPhone from '../../utils/formattingPhone';
 
 export const ContactForm = ({
   buttonLabel
@@ -89,7 +89,7 @@ export const ContactForm = ({
       <FormGroup>
         <Input 
           placeholder='Telefone'
-          value={formatPhone(phone)}
+          value={phoneFormat(phone)}
           onChange={handlePhoneChange}
           maxLength="15"
         />

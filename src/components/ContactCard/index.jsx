@@ -1,6 +1,7 @@
 import React from 'react';
 import editSvg from '../../assets/images/edit.svg';
 import deleteSvg from '../../assets/images/trash.svg';
+import phoneFormat from '../../utils/phoneFormat';
 
 import {
   Container,
@@ -18,10 +19,10 @@ export const ContactCard = ({contact}) => {
       <Wrapper>
         <HeaderContainer>
           <strong>{contact.name}</strong>
-          <small>{contact.socialMedia}</small>
+          <small>{contact.category_name}</small>
         </HeaderContainer>
         <p>{contact.email}</p>
-        <p>{contact.phone}</p>
+        <p>{phoneFormat(contact.phone)}</p>
       </Wrapper>
       <Settings>
          <Link to={`/edit/${contact.id}`}>

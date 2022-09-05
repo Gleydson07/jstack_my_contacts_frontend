@@ -11,33 +11,7 @@ import {
   Body
 } from './styles';
 
-const initContacts = [
-  {
-    id: 1,
-    name: 'Gleydson Albuquerque',
-    socialMedia: 'link',
-    email: 'gsantos@gmail.com',
-    phone: '(82) 98111-4246'
-  },
-  {
-    id: 2,
-    name: 'Gleydson Albuquerque',
-    socialMedia: 'link',
-    email: 'gsantos1@gmail.com',
-    phone: '(82) 98111-4246'
-  },
-  {
-    id: 3,
-    name: 'Gleydson Albuquerque',
-    socialMedia: 'link',
-    email: 'gsantos2@gmail.com',
-    phone: '(82) 98111-4246'
-  },
-]
-
-export const ContactList = () => {
-  const [contacts, setContacts] = useState(initContacts);
-
+export const ContactList = ({contacts}) => {
   return (
     <Container>
       <Header>
