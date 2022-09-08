@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { ContactList } from '../../components/ContactList';
 
 import {
@@ -28,11 +28,11 @@ export const Home = () => {
 
   const handleChangeSearchTerm = e => setSearchTerm(e.target.value);
 
-  const filteredContacts = contacts.filter((contact) => (
+  const filteredContacts = useMemo(() => contacts.filter((contact) => (
     //Buscar palavras que começam com o parâmetro informado
     // contact.name.toUpperCase().startsWith(searchTerm.toUpperCase())
     contact.name.toUpperCase().includes(searchTerm.toUpperCase())
-  ));
+  )), [contacts, searchTerm]);
 
   useEffect(() => {
     loadContacts(contactsOrder);
