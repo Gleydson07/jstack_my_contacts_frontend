@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import arrowSvg from '../../assets/images/arrow.svg';
 
@@ -14,10 +14,10 @@ export const PageHeader = ({
 
   return (
     <Container>
-      <Link to={link}>
+      <NavLink  to={link}>
         <img src={arrowSvg} alt="back" />
         <span>Voltar</span>
-      </Link>
+      </NavLink >
 
       <h1>{title}</h1>
     </Container>

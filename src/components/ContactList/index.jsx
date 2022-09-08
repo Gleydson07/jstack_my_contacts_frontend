@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ContactCard } from '../ContactCard';
 
 import arrowSvg from '../../assets/images/arrow.svg';
@@ -11,21 +11,28 @@ import {
   Body
 } from './styles';
 
-export const ContactList = ({contacts}) => {
+export const ContactList = ({contacts, toggleOrder, order}) => {
   return (
     <Container>
       <Header>
-        <Title>{contacts.length} contatos</Title>
+        <Title>
+          {contacts.length} 
+          {contacts.length === 1 ? " contato" : " contatos"}
+        </Title> 
         <Link to="/new">Novo contato</Link>
       </Header>
 
-      <Body>
-        <header>
-          <button type='button' className='sort-button'>
+      <Body orderBy={order}>
+        {contacts.length ? <header>
+          <button 
+            type='button' 
+            className='sort-button'
+            onClick={toggleOrder}
+          >
             <span>Nome</span>
             <img src={arrowSvg} alt="seta" />
           </button>
-        </header> 
+        </header> : ''} 
 
         {contacts && contacts.map(contact => (
           <ContactCard

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link as LinkRRDOM} from 'react-router-dom';
 
 export const Container = styled.div`
@@ -64,8 +64,13 @@ export const Body = styled.div`
       outline: 0;
       padding: 4px;
 
+      
       img{
         margin-left: 8px;
+        transition: transform 0.2s ease-in;
+        ${({orderBy}) => orderBy && css`
+          transform: rotate(180deg);
+        `}
       }
     }
   }
