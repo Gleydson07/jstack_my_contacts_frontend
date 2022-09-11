@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { ContactList } from '../../components/ContactList';
+import { Loader } from '../../components/Loader';
+import ContactsService from '../../services/ContactsService';
 
 import {
   Container,  
@@ -10,16 +12,19 @@ export const Home = () => {
   const [contacts, setContacts] = useState([]);
   const [contactsOrder, serContactsOrder] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
-  const loadContacts = () => {
-    fetch(`http://localhost:3001/contacts?orderBy=${contactsOrder ? 'ASC' : 'DESC'}`)
-    .then(async response => {
-      const json = await response.json();
-      setContacts(json);
-    })
-    .catch((error) => {
-      HTMLFormControlsCollection.log('error: ', error)
-    })
+  const loadContacts = async () => {
+    try {
+      setIsLoading(true);
+      const data = await ContactsService.listContacts(contactsOrder);
+
+      setContacts(data);
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setIsLoading(false);
+    }
   }
 
   const handleToggleContactOrder = () => {
@@ -40,6 +45,7 @@ export const Home = () => {
 
   return (
     <Container>
+      <Loader isLoading={isLoading}/>
       <InputSearchContainer>
         <input  
           type="text"

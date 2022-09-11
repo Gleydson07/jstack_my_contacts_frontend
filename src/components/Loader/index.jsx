@@ -5,7 +5,12 @@ import {
   Overlay
 } from './styles';
 
-export const Loader = () => {
+export const Loader = ({isLoading}) => {
+
+  if(!isLoading){
+    return null;
+  }
+
   return ReactDOM.createPortal(
     <Overlay>
       <div className="loader"/>
