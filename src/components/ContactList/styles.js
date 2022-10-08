@@ -8,17 +8,81 @@ export const Container = styled.div`
 
 export const Header = styled.header`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({ alignEnd, alignCenter }) => alignEnd ? 'flex-end' : alignCenter ? 'center' : 'space-between'};
   align-items: center;
   margin-top: 32px;
 `
+
+export const ErrorContainer = styled.div`
+  display: flex;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid ${({theme}) => theme.colors.gray[100]};
+
+  > div {
+    margin-left: 24px;
+
+    strong{
+      display: block;
+      font-family: 'Sora';
+      font-weight: 700;
+      font-size: 22px;
+      color: ${({theme}) => theme.colors.danger.main};
+    }
+
+    button{
+      margin-top: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 8px 16px;
+      color: ${({theme}) => theme.colors.background};
+      border: 2px solid ${({theme}) => theme.colors.primary.main};
+      background: ${({theme}) => theme.colors.primary.main};
+      border-radius: 4px;
+
+      transition: all 0.2s ease-in;
+      
+      &:hover{
+        filter: opacity(0.9);
+      }
+    }
+  }
+`;
+
+export const NotExistsContactsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid ${({theme}) => theme.colors.gray[100]};
+
+  span{
+    display: block;
+    margin: 16px 32px 0;
+    
+    font-family: 'Sora';
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: ${({theme}) => theme.colors.gray[200]};
+    
+    strong{
+      font-weight: 700;
+      color: ${({theme}) => theme.colors.primary.main};
+    }
+  }
+
+`;
 
 export const Title = styled.h4`
   color: #222222;
   font-size: 24px;
   font-weight: 700;
   line-height: 30px;
-  `
+`;
 
 export const Link = styled(LinkRRDOM)`
   font-weight: 700;
@@ -46,7 +110,9 @@ export const Divider = styled.span`
 
 export const Body = styled.div`
   width: 100%;
-  margin-top: 24px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid ${({theme}) => theme.colors.gray[100]};
 
   header{
     span{

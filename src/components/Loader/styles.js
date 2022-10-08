@@ -35,7 +35,7 @@ const round = keyframes`
 `;
 
 export const Overlay = styled.div`
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   background: rgba(246, 246, 246, 0.8);

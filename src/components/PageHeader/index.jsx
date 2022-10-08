@@ -18,7 +18,6 @@ export const PageHeader = ({
         <img src={arrowSvg} alt="back" />
         <span>Voltar</span>
       </NavLink >
-
       <h1>{title}</h1>
     </Container>
   )

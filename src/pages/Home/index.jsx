@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { useCallback } from 'react';
 import { ContactList } from '../../components/ContactList';
 import { Loader } from '../../components/Loader';
 import ContactsService from '../../services/ContactsService';
@@ -13,19 +14,21 @@ export const Home = () => {
   const [contactsOrder, serContactsOrder] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
-  const loadContacts = async () => {
+  const loadContacts = useCallback(async () => {
     try {
       setIsLoading(true);
       const data = await ContactsService.listContacts(contactsOrder);
-
+      
+      setHasError(false);
       setContacts(data);
     } catch (error) {
-      console.log(error)
+      setHasError(true);
     }finally{
       setIsLoading(false);
     }
-  }
+  }, [contactsOrder])
 
   const handleToggleContactOrder = () => {
     serContactsOrder((prevState) => !prevState);
@@ -40,24 +43,28 @@ export const Home = () => {
   )), [contacts, searchTerm]);
 
   useEffect(() => {
-    loadContacts(contactsOrder);
+    loadContacts();
   }, [contactsOrder])
 
   return (
     <Container>
       <Loader isLoading={isLoading}/>
-      <InputSearchContainer>
+      {!hasError && <InputSearchContainer>
         <input  
           type="text"
           placeholder='Pesquisar pelo nome...'
           value={searchTerm}
           onChange={handleChangeSearchTerm}
         />
-      </InputSearchContainer>
+      </InputSearchContainer>}
       <ContactList 
-        contacts={filteredContacts}
+        contacts={contacts}
+        filteredContacts={filteredContacts}
         order={contactsOrder}
+        hasError={hasError}
+        handleTryAgain={loadContacts}
         toggleOrder={handleToggleContactOrder}
+        isLoading={isLoading}
       />
     </Container>
   )

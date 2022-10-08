@@ -8,3 +8,5 @@ class APIError extends Error{
     this.message = body?.error || `${response.status} - ${response.statusText}`
   }
 }
+
+export default APIError;
