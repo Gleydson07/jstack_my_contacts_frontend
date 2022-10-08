@@ -62,9 +62,10 @@ export const Home = () => {
         filteredContacts={filteredContacts}
         order={contactsOrder}
         hasError={hasError}
+        isLoading={isLoading}
+        search={searchTerm}
         handleTryAgain={loadContacts}
         toggleOrder={handleToggleContactOrder}
-        isLoading={isLoading}
       />
     </Container>
   )

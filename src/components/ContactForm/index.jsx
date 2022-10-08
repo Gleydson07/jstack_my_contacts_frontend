@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useErrors from '../../hooks/useErrors';
 import isEmailValid from '../../utils/emailValidate';
 import phoneFormat from '../../utils/phoneFormat';
+import CategoriesService from '../../services/CategoriesService';
 
 import { Input } from '../Input';
 import { Select } from '../Select';
@@ -12,6 +13,8 @@ import {
   ButtonContainer,
   Form
 } from './styles';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 export const ContactForm = ({
   buttonLabel
@@ -26,6 +29,18 @@ export const ContactForm = ({
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [socialMedia, setSocialMedia] = useState('');
+  const [socialMedias, setSocialMedias] = useState([]);
+
+  const loadSocialMediaCategories = useCallback(async () => {
+    try {
+      const data = await CategoriesService.listCategories();
+      console.log(data);
+      
+      setSocialMedias(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [])
 
   const handleNameChange = e => {
     setName(e.target.value);
@@ -63,7 +78,9 @@ export const ContactForm = ({
 
   const handleSubmit = e => {
     e.preventDefault();
-  }
+  };
+
+  useEffect(() => { loadSocialMediaCategories() }, []);
 
   return (
     <Form onSubmit={handleSubmit} noValidate>
@@ -101,7 +118,9 @@ export const ContactForm = ({
           onChange={handleSocialMediaChange} 
         >
           <option defaultValue="-">Selecione uma rede social</option>
-          <option value="instagram">Instagram</option>
+          {socialMedias.map(media => (
+            <option key={media.id} value={media.id}>{media.name}</option>
+          ))}
         </Select>
       </FormGroup>
 

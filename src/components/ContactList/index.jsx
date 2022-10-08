@@ -4,6 +4,7 @@ import { ContactCard } from '../ContactCard';
 import arrowSvg from '../../assets/images/arrow.svg';
 import sadSvg from '../../assets/images/sad.svg';
 import emptyBoxSvg from '../../assets/images/empty-box.svg';
+import magnifierQuestionSvg from '../../assets/images/magnifier-question.svg';
 
 import {
   Link,
@@ -12,7 +13,8 @@ import {
   Title,
   Body,
   ErrorContainer,
-  NotExistsContactsContainer
+  NotExistsContactsContainer,
+  NotFoundContactsBySearch
 } from './styles';
 
 export const ContactList = ({
@@ -22,7 +24,8 @@ export const ContactList = ({
   order, 
   hasError,
   handleTryAgain,
-  isLoading
+  isLoading,
+  search
 }) => {
   return (
     <Container>
@@ -59,7 +62,14 @@ export const ContactList = ({
                   />
                 ))}
               </>
-            : ''}
+            : 
+              <NotFoundContactsBySearch>
+                <img src={magnifierQuestionSvg} alt="busca" />
+                <span>
+                  Nenhum resultado foi encontrado para <strong>”{search}”</strong>.
+                </span>
+              </NotFoundContactsBySearch>
+            }
           </Body>
           : 
           !isLoading && 

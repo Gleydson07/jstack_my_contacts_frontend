@@ -49,6 +49,29 @@ export const ErrorContainer = styled.div`
   }
 `;
 
+export const NotFoundContactsBySearch = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  span{
+    display: block;
+    margin-left: 16px;
+    
+    font-family: 'Sora';
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: ${({theme}) => theme.colors.gray[200]};
+    
+    strong{
+      font-weight: 700;
+      color: ${({theme}) => theme.colors.primary.main};
+    }
+  }
+
+`;
+
 export const NotExistsContactsContainer = styled.div`
   display: flex;
   flex-direction: column;
