@@ -17,7 +17,8 @@ import { useEffect } from 'react';
 import { useCallback } from 'react';
 
 export const ContactForm = ({
-  buttonLabel
+  buttonLabel,
+  onSubmit
 }) => {
   const {
     hasError,
@@ -80,6 +81,12 @@ export const ContactForm = ({
 
   const handleSubmit = e => {
     e.preventDefault();
+    onSubmit({
+      name,
+      email,
+      phone,
+      categoryId: socialMedia
+    })
   };
 
   useEffect(() => { loadSocialMedias() }, []);
