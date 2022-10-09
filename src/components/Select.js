@@ -17,6 +17,11 @@ export const Select = styled.select`
     border-color: ${({theme}) => theme.colors.primary.main};
   }
 
+  &[disabled]{    
+    border-color: ${({theme}) => theme.colors.gray[200]};
+    background-color: ${({theme}) => theme.colors.gray[100]};
+  }
+
   option{
     &:disabled{
       color: #BCBCBC;

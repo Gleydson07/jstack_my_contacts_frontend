@@ -30,15 +30,17 @@ export const ContactForm = ({
   const [phone, setPhone] = useState('');
   const [socialMedia, setSocialMedia] = useState('');
   const [socialMedias, setSocialMedias] = useState([]);
+  const [isLoadingSocialMedia, setIsLoadingSocialMedia] = useState(true);
 
-  const loadSocialMediaCategories = useCallback(async () => {
+  const loadSocialMedias = useCallback(async () => {
+    setIsLoadingSocialMedia(true);
     try {
-      const data = await CategoriesService.listCategories();
-      console.log(data);
-      
+      const data = await CategoriesService.listCategories();      
       setSocialMedias(data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoadingSocialMedia(false);
     }
   }, [])
 
@@ -80,7 +82,7 @@ export const ContactForm = ({
     e.preventDefault();
   };
 
-  useEffect(() => { loadSocialMediaCategories() }, []);
+  useEffect(() => { loadSocialMedias() }, []);
 
   return (
     <Form onSubmit={handleSubmit} noValidate>
@@ -112,14 +114,17 @@ export const ContactForm = ({
         />
       </FormGroup>
 
-      <FormGroup>
+      <FormGroup isLoading={isLoadingSocialMedia}>
         <Select 
           value={socialMedia}
-          onChange={handleSocialMediaChange} 
+          onChange={handleSocialMediaChange}
+          disabled={isLoadingSocialMedia}
         >
-          <option defaultValue="-">Selecione uma rede social</option>
+          <option defaultValue="-">Sem rede social</option>
           {socialMedias.map(media => (
-            <option key={media.id} value={media.id}>{media.name}</option>
+            <option key={media.id} value={media.id}>
+              {media.name}
+            </option>
           ))}
         </Select>
       </FormGroup>

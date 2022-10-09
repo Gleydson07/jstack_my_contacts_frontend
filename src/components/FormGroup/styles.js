@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   & + & {
@@ -8,4 +8,14 @@ export const Container = styled.div`
   small{
     color: ${({theme}) => theme.colors.danger.main};
   }
+
+  .form-item{
+    position: relative;
+  }
+`;
+
+export const SpinnerWrapper = styled.div`   
+  position: absolute;
+  right: 32px;
+  top: 18px;
 `;
