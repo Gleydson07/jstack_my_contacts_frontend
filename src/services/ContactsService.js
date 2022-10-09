@@ -7,11 +7,18 @@ class ContactsService {
   }
 
   async listContacts(orderBy = 'asc'){
-    return this.httpClient.get(`/contacts?orderBy=${orderBy ? 'ASC' : 'DESC'}`);
+    return this.httpClient.get(`/contacts?orderBy=${orderBy ? 'ASC' : 'DESC'}`, {
+      headers: {
+        'Authorization': 'Token',
+        'Auth': 'Auth2',
+      }
+    });
   }
 
   async createContact(contact){
-    return this.httpClient.post(`/contacts`, contact);
+    return this.httpClient.post(`/contacts`, {
+      body: contact
+    });
   }
 }
 
