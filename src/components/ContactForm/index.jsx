@@ -15,6 +15,7 @@ import {
 } from './styles';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
+import { Spinner } from '../Spinner';
 
 export const ContactForm = ({
   buttonLabel,
@@ -32,6 +33,7 @@ export const ContactForm = ({
   const [socialMedia, setSocialMedia] = useState('');
   const [socialMedias, setSocialMedias] = useState([]);
   const [isLoadingSocialMedia, setIsLoadingSocialMedia] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const loadSocialMedias = useCallback(async () => {
     setIsLoadingSocialMedia(true);
@@ -81,11 +83,14 @@ export const ContactForm = ({
 
   const handleSubmit = e => {
     e.preventDefault();
+    setIsSubmitting(true);
     onSubmit({
       name,
       email,
       phone,
       categoryId: socialMedia
+    }).finally(() => {
+      setIsSubmitting(false);
     })
   };
 
@@ -99,6 +104,7 @@ export const ContactForm = ({
           value={name}
           onChange={handleNameChange}
           error={getErrorMessageByFieldName('name')}
+          disabled={isSubmitting}
         />
       </FormGroup>
 
@@ -109,6 +115,7 @@ export const ContactForm = ({
           type="email"
           onChange={handleEmailChange}
           error={getErrorMessageByFieldName('email')}
+          disabled={isSubmitting}
         />
       </FormGroup>
 
@@ -118,6 +125,7 @@ export const ContactForm = ({
           value={phoneFormat(phone)}
           onChange={handlePhoneChange}
           maxLength="15"
+          disabled={isSubmitting}
         />
       </FormGroup>
 
@@ -125,7 +133,7 @@ export const ContactForm = ({
         <Select 
           value={socialMedia}
           onChange={handleSocialMediaChange}
-          disabled={isLoadingSocialMedia}
+          disabled={isLoadingSocialMedia || isSubmitting}
         >
           <option defaultValue="-">Sem rede social</option>
           {socialMedias.map(media => (
@@ -137,7 +145,12 @@ export const ContactForm = ({
       </FormGroup>
 
       <ButtonContainer>
-        <Button disabled={!name || hasError} type="submit">{buttonLabel}</Button>
+        <Button 
+          disabled={!name || hasError} 
+          isLoading={isSubmitting}
+          type="submit"
+          label={buttonLabel}
+        />
       </ButtonContainer>
     </Form>
   )

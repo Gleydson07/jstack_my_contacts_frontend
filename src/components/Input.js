@@ -18,6 +18,11 @@ export const Input = styled.input`
   &:focus{
     border-color: ${({theme}) => theme.colors.primary.main};
   }
+
+  &[disabled]{    
+    border-color: ${({theme}) => theme.colors.gray[200]};
+    background-color: ${({theme}) => theme.colors.gray[100]};
+  }
   
   ${({theme, error}) => error && css`
     color: ${theme.colors.danger.main};

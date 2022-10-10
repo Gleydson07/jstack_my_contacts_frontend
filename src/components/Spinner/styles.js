@@ -35,7 +35,9 @@ const round = keyframes`
 `;
 
 export const Container = styled.div`
-  color: ${({ theme }) => theme.colors.primary.main};
+  color: ${({ theme, color }) => color === 'blue' ?
+    theme.colors.primary.main : theme.colors.background
+  };
   font-size: ${({ size }) => `${size}px`};
   width: 1em;
   height: 1em;

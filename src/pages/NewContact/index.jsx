@@ -17,7 +17,7 @@ export const NewContact = () => {
         phone: formData.phone,
         category_id: formData.categoryId
       }
-      await ContactService.createContact({body: contact});
+      await ContactService.createContact(contact);
     } catch (error) {
       console.log(error);
     }
