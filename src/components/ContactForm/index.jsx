@@ -5,8 +5,8 @@ import phoneFormat from '../../utils/phoneFormat';
 import CategoriesService from '../../services/CategoriesService';
 
 import { Input } from '../Input';
-import { Select } from '../Select';
 import { Button } from '../Button';
+import { Select } from '../Select';
 import { FormGroup } from '../FormGroup';
 
 import {
@@ -15,7 +15,6 @@ import {
 } from './styles';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
-import { Spinner } from '../Spinner';
 
 export const ContactForm = ({
   buttonLabel,
