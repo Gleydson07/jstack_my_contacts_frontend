@@ -19,7 +19,14 @@ export const NewContact = () => {
       }
       await ContactService.createContact(contact);
     } catch (error) {
-      console.log(error);
+      const event = new CustomEvent('addtoast', {
+        detail: {
+          type: 'error',
+          text: 'Ocorreu um erro ao cadastrar contato!'
+        }
+      });
+
+      document.dispatchEvent(event);
     }
   }
 

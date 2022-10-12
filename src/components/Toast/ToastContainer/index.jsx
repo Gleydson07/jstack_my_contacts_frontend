@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ToastMessage } from '../ToastMessage';
 
 import {
@@ -6,19 +6,29 @@ import {
 } from './styles';
 
 export const ToastContainer = () => {
-  const [messages, setMessages] = useState([
-    {id: Math.random(), type: 'info', text: 'Info message'},
-    {id: Math.random(), type: 'error', text: 'Error message'},
-    {id: Math.random(), type: 'success', text: 'Success message'},
-    {id: Math.random(), type: 'info', text: 'Info message'},
-  ])
+  const [messages, setMessages] = useState([]);
+
+  const addToast = (event) => {
+    setMessages(prevState => [
+      ...prevState, 
+      {id: Math.random(), ...event.detail}
+    ])
+  };
+
+  useEffect(() => {
+    document.addEventListener('addtoast', addToast);
+
+    return () => {
+      document.removeEventListener('addtoast', addToast);
+    }
+  }, [])
 
   return (
     <Container>
       {messages.map(msg => (
-        <ToastMessage 
-          key={msg.id} 
-          type={msg.type} 
+        <ToastMessage
+          key={msg.id}
+          type={msg.type}
           text={msg.text}
         />
       ))}
