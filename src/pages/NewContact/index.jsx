@@ -2,6 +2,7 @@ import React from 'react';
 import ContactService from '../../services/ContactsService';
 import { ContactForm } from '../../components/ContactForm';
 import { PageHeader } from '../../components/PageHeader';
+import toast from '../../utils/toast';
 
 import {
   Container
@@ -18,15 +19,9 @@ export const NewContact = () => {
         category_id: formData.categoryId
       }
       await ContactService.createContact(contact);
+      toast('success', 'Contato salvo com sucesso!');
     } catch (error) {
-      const event = new CustomEvent('addtoast', {
-        detail: {
-          type: 'error',
-          text: 'Ocorreu um erro ao cadastrar contato!'
-        }
-      });
-
-      document.dispatchEvent(event);
+      toast('error', 'Ocorreu um erro ao tentar salvar contato!');
     }
   }
 
