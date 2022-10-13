@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { toastEventManager } from '../../../utils/toast';
 import { ToastMessage } from '../ToastMessage';
 
 import {
@@ -8,18 +9,23 @@ import {
 export const ToastContainer = () => {
   const [messages, setMessages] = useState([]);
 
-  const addToast = (event) => {
+  const addToast = ({ type, text}) => {
     setMessages(prevState => [
       ...prevState, 
-      {id: Math.random(), ...event.detail}
+      {id: Math.random(), type, text}
     ])
   };
 
+  const handleRemoveMessage = (id) => {
+    const filteredMessages = messages.filter(msg => msg.id !== id);
+    setMessages(filteredMessages);
+  };
+
   useEffect(() => {
-    document.addEventListener('addtoast', addToast);
+    toastEventManager.on('addtoast', addToast);
 
     return () => {
-      document.removeEventListener('addtoast', addToast);
+      toastEventManager.removeListener('addtoast', addToast);
     }
   }, [])
 
@@ -28,8 +34,10 @@ export const ToastContainer = () => {
       {messages.map(msg => (
         <ToastMessage
           key={msg.id}
+          id={msg.id}
           type={msg.type}
           text={msg.text}
+          onRemoveMessage={handleRemoveMessage}
         />
       ))}
     </Container>

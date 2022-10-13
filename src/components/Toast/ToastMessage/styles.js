@@ -15,6 +15,7 @@ export const Container = styled.div`
   font-family: 'Sora';
   font-weight: 700;
   font-size: 16px;
+  cursor: pointer;
   color: ${({ theme }) => theme.colors.background};
   background: ${({ type }) => toast[type]};
 

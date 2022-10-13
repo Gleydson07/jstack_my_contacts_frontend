@@ -7,12 +7,21 @@ import {
 } from './styles';
 
 export const ToastMessage = ({
+  id,
   type = 'info',
-  text
+  text,
+  onRemoveMessage
 }) => {
+  const handleRemoveToast = () => {
+    onRemoveMessage(id);
+  };
 
   return (
-    <Container type={type}>
+    <Container 
+      id={id}
+      type={type}
+      onClick={handleRemoveToast}
+    >
       {type !== 'info' && 
         <img 
           src={type === 'success' ? checkCircleSvg : xCircleSvg} 
