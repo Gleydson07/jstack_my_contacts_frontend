@@ -90,6 +90,10 @@ export const ContactForm = ({
       categoryId: socialMedia
     }).finally(() => {
       setIsSubmitting(false);
+      setName('');
+      setEmail('');
+      setPhone('');
+      setSocialMedia('');
     })
   };
 
