@@ -5,22 +5,31 @@ import checkCircleSvg from '../../../assets/images/check-circle.svg';
 import {
   Container
 } from './styles';
+import { useEffect } from 'react';
 
 export const ToastMessage = ({
-  id,
-  type = 'info',
-  text,
+  message,
   onRemoveMessage
 }) => {
+  const {id, type, text, duration} = message;
   const handleRemoveToast = () => {
     onRemoveMessage(id);
   };
 
+  useEffect(() => {
+    const timeoutId = setTimeout(() => onRemoveMessage(id), duration || 7000);
+
+    return () => {
+      clearTimeout(timeoutId); 
+    }
+  }, [message, onRemoveMessage])
+
   return (
-    <Container 
-      id={id}
+    <Container
       type={type}
       onClick={handleRemoveToast}
+      tabIndex={0}
+      role="button"
     >
       {type !== 'info' && 
         <img 

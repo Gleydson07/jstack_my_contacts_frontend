@@ -17,7 +17,7 @@ export const Container = styled.div`
   font-size: 16px;
   cursor: pointer;
   color: ${({ theme }) => theme.colors.background};
-  background: ${({ type }) => toast[type]};
+  background: ${({ type }) => toast[type] || toast.info};
 
   & + & {
     margin-top: 12px;

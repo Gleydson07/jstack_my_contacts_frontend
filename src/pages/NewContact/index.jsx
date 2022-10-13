@@ -9,7 +9,6 @@ import {
 } from './styles';
 
 export const NewContact = () => {
-
   const handleCreateContact = async (formData) => {
     try {
       const contact = {
@@ -19,9 +18,9 @@ export const NewContact = () => {
         category_id: formData.categoryId
       }
       await ContactService.createContact(contact);
-      toast('success', 'Contato salvo com sucesso!');
+      toast('success', 'Contato salvo com sucesso!', 5000);
     } catch (error) {
-      toast('error', 'Ocorreu um erro ao tentar salvar contato!');
+      toast('error', 'Ocorreu um erro ao tentar salvar contato!', 5000);
     }
   }
 

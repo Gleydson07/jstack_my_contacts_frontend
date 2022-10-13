@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useCallback } from 'react';
 import { toastEventManager } from '../../../utils/toast';
 import { ToastMessage } from '../ToastMessage';
 
@@ -9,17 +10,16 @@ import {
 export const ToastContainer = () => {
   const [messages, setMessages] = useState([]);
 
-  const addToast = ({ type, text}) => {
+  const addToast = ({ type, text, duration}) => {
     setMessages(prevState => [
       ...prevState, 
-      {id: Math.random(), type, text}
+      {id: Math.random(), type, text, duration}
     ])
   };
 
-  const handleRemoveMessage = (id) => {
-    const filteredMessages = messages.filter(msg => msg.id !== id);
-    setMessages(filteredMessages);
-  };
+  const handleRemoveMessage = useCallback((id) => {
+    setMessages(prevState => prevState.filter(msg => msg.id !== id));
+  }, []);
 
   useEffect(() => {
     toastEventManager.on('addtoast', addToast);
@@ -34,9 +34,7 @@ export const ToastContainer = () => {
       {messages.map(msg => (
         <ToastMessage
           key={msg.id}
-          id={msg.id}
-          type={msg.type}
-          text={msg.text}
+          message={msg}
           onRemoveMessage={handleRemoveMessage}
         />
       ))}
