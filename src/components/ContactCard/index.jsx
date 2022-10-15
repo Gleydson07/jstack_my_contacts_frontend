@@ -13,7 +13,6 @@ import {
 } from './styles';
 
 export const ContactCard = ({contact}) => {
-
   return (
     <Container>
       <Wrapper>

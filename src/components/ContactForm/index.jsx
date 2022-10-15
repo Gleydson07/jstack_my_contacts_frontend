@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import useErrors from '../../hooks/useErrors';
 import isEmailValid from '../../utils/emailValidate';
 import phoneFormat from '../../utils/phoneFormat';
@@ -16,10 +16,10 @@ import {
 import { useEffect } from 'react';
 import { useCallback } from 'react';
 
-export const ContactForm = ({
+export const ContactForm = forwardRef(({
   buttonLabel,
   onSubmit
-}) => {
+}, ref) => {
   const {
     hasError,
     setError,
@@ -90,12 +90,26 @@ export const ContactForm = ({
       categoryId: socialMedia
     }).finally(() => {
       setIsSubmitting(false);
+    });
+    
+  };
+
+  useImperativeHandle(ref, () => ({
+    setFieldsValues: (contact) => {
+      setName(contact.name ?? '');
+      setEmail(contact.email ?? '');
+      setPhone(contact.phone ?? '');
+      setSocialMedia(contact.category_id ?? '');
+    },
+
+    resetFields: () => {
+      setIsSubmitting(false);
       setName('');
       setEmail('');
       setPhone('');
       setSocialMedia('');
-    })
-  };
+    }
+  }), []);
 
   useEffect(() => { loadSocialMedias() }, []);
 
@@ -157,4 +171,4 @@ export const ContactForm = ({
       </ButtonContainer>
     </Form>
   )
-}
+})

@@ -15,8 +15,23 @@ class ContactsService {
     });
   }
 
+  async findContact(contactId){
+    return this.httpClient.get(`/contacts/${contactId}`, {
+      headers: {
+        'Authorization': 'Token',
+        'Auth': 'Auth2',
+      }
+    });
+  }
+
   async createContact(contact){
     return this.httpClient.post(`/contacts`, {
+      body: contact
+    });
+  }
+
+  async editContact(contactId, contact){
+    return this.httpClient.put(`/contacts/${contactId}`, {
       body: contact
     });
   }
