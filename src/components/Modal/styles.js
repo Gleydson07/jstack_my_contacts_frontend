@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Overlay = styled.div`
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   backdrop-filter: blur(3px);
@@ -22,15 +22,15 @@ export const Container = styled.div`
   max-width: 450px;
   width: 100%;
 
-  h1{
+  .modal-title{
     font-size: 22px;
     color: ${({theme, danger}) => (
       danger ? theme.colors.danger.main: theme.colors.gray[900]
     )}
   }
 
-  p{
-    margin-top: 8px;
+  .modal-body{
+    margin-top: 32px;
   }
   
 `
@@ -50,5 +50,9 @@ export const Footer = styled.footer`
     background: transparent;    
     color: #BCBCBC;
     transition: background 0.2s ease-in;
+
+    &[disabled] {
+      cursor: default;
+    }
   }
 `

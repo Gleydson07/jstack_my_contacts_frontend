@@ -12,7 +12,7 @@ import {
   Link
 } from './styles';
 
-export const ContactCard = ({contact}) => {
+export const ContactCard = ({contact, onDelete}) => {
   return (
     <Container>
       <Wrapper>
@@ -27,7 +27,7 @@ export const ContactCard = ({contact}) => {
          <Link to={`/edit/${contact.id}`}>
           <img src={editSvg} alt="editar" height={22}/>
          </Link>
-         <Button>
+         <Button onClick={onDelete}>
             <img src={deleteSvg} alt="excluir" height={22}/>
          </Button>
       </Settings>

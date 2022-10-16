@@ -8,9 +8,10 @@ import {
 } from './styles';
 
 export const Button = ({
+  type,
   label,
   onClick,
-  type,
+  danger = false,
   disabled,
   isLoading
 }) => {
@@ -20,6 +21,7 @@ export const Button = ({
       type={type} 
       disabled={disabled || isLoading}
       onClick={onClick}
+      danger={danger}
     >
       {isLoading ? <Spinner size={16}/> : label}
     </StyledButton>

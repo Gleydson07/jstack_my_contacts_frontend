@@ -25,6 +25,7 @@ export const ContactList = ({
   hasError,
   handleTryAgain,
   isLoading,
+  onDelete,
   search
 }) => {
   return (
@@ -59,6 +60,7 @@ export const ContactList = ({
                   <ContactCard
                     key={contact.id}
                     contact={contact}
+                    onDelete={() => onDelete(contact)}
                   />
                 ))}
               </>

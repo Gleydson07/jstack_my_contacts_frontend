@@ -28,7 +28,7 @@ class HttpClient {
     
     let responseBody = null
     const contentType = response.headers.get('Content-Type');
-    if(contentType.includes('application/json')){
+    if(contentType?.includes('application/json')){
       responseBody = await response.json();
     }
     
@@ -61,6 +61,13 @@ class HttpClient {
     return this.makeRequest(path, {
       method: 'PUT', 
       body: options?.body,
+      headers: options?.headers
+    });
+  }
+
+  delete(path, options){
+    return this.makeRequest(path, {
+      method: 'DELETE',
       headers: options?.headers
     });
   }

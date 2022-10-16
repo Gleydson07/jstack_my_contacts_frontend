@@ -35,6 +35,10 @@ class ContactsService {
       body: contact
     });
   }
+
+  async deleteContact(contactId){
+    return this.httpClient.delete(`/contacts/${contactId}`);
+  }
 }
 
 export default new ContactsService();

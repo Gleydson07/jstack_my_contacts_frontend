@@ -8,17 +8,39 @@ import {
   Overlay
 } from './styles';
 
-export const Modal = ({danger = false}) => {
+export const Modal = ({
+  title,
+  danger = false,
+  children,
+  cancelLabel = 'Cancelar',
+  onCancel,
+  confirmLabel = 'Confirmar',
+  onConfirm,
+  isLoading
+}) => {
   return ReactDOM.createPortal(
     <Overlay>
       <Container danger={danger}>
-        <h1>Título do modal</h1>
-        <p>Corpo do modal</p>
+        <h1 className='modal-title'>{title}</h1>
+        <div className="modal-body">
+          {children}
+        </div>
         <Footer>
-          <button type="button" className='btn-cancel'>
-            Cancelar
+          <button 
+            type="button" 
+            className='btn-cancel'
+            disabled={isLoading}
+            onClick={onCancel}
+          >
+            {cancelLabel}
           </button>
-          <Button type="button" danger={danger}>Deletar</Button>
+          <Button 
+            type="button"
+            danger={danger}
+            label={confirmLabel}
+            isLoading={isLoading}
+            onClick={onConfirm}
+          />
         </Footer>
       </Container>
     </Overlay>
