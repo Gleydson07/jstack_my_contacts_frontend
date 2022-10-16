@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Button } from '../Button';
+import ReactPortal from '../ReactPortal';
 
 import {
   Container,
@@ -18,31 +18,34 @@ export const Modal = ({
   onConfirm,
   isLoading
 }) => {
-  return ReactDOM.createPortal(
-    <Overlay>
-      <Container danger={danger}>
-        <h1 className='modal-title'>{title}</h1>
-        <div className="modal-body">
-          {children}
-        </div>
-        <Footer>
-          <button 
-            type="button" 
-            className='btn-cancel'
-            disabled={isLoading}
-            onClick={onCancel}
-          >
-            {cancelLabel}
-          </button>
-          <Button 
-            type="button"
-            danger={danger}
-            label={confirmLabel}
-            isLoading={isLoading}
-            onClick={onConfirm}
-          />
-        </Footer>
-      </Container>
-    </Overlay>
-  , document.getElementById('modal-root'))
+
+  return (
+    <ReactPortal portalId='portal-modal'>
+      <Overlay>
+        <Container danger={danger}>
+          <h1 className='modal-title'>{title}</h1>
+          <div className="modal-body">
+            {children}
+          </div>
+          <Footer>
+            <button 
+              type="button" 
+              className='btn-cancel'
+              disabled={isLoading}
+              onClick={onCancel}
+            >
+              {cancelLabel}
+            </button>
+            <Button 
+              type="button"
+              danger={danger}
+              label={confirmLabel}
+              isLoading={isLoading}
+              onClick={onConfirm}
+            />
+          </Footer>
+        </Container>
+      </Overlay>
+    </ReactPortal>
+  )
 }
