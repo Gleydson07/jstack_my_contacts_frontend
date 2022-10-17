@@ -39,9 +39,7 @@ export const ContactForm = forwardRef(({
     try {
       const data = await CategoriesService.listCategories();      
       setSocialMedias(data);
-    } catch (error) {
-      console.log(error);
-    } finally {
+    } catch {} finally {
       setIsLoadingSocialMedia(false);
     }
   }, [])

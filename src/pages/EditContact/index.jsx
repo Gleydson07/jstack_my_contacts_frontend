@@ -26,6 +26,7 @@ export const EditContact = () => {
       setIsLoading(false);
     } catch {      
       navigate('/');
+      toast('error', 'Contato não encontrado');
     }
   }
 
