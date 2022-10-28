@@ -7,18 +7,13 @@ import toast from '../../utils/toast';
 import {
   Container
 } from './styles';
+import ContactMapper from '../../services/mappers/ContactMapper';
 
 export const NewContact = () => {
   const contactFormRef = useRef(null);
 
-  const handleCreateContact = async (formData) => {
+  const handleCreateContact = async (contact) => {
     try {
-      const contact = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        category_id: formData.categoryId
-      }
       await ContactService.createContact(contact);
       contactFormRef.current.resetFields();
       toast('success', 'Contato salvo com sucesso!', 5000);

@@ -9,6 +9,7 @@ import toast from '../../utils/toast';
 import {
   Container
 } from './styles';
+import ContactMapper from '../../services/mappers/ContactMapper';
 
 export const EditContact = () => {
   const {id} = useParams();
@@ -30,15 +31,8 @@ export const EditContact = () => {
     }
   }
 
-  const handleEditContact = async (formData) => {
+  const handleEditContact = async (contact) => {
     try {
-      const contact = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        category_id: formData.categoryId
-      }
-
       const contactData = await ContactService.editContact(id, contact);
       setContactName(contactData.name);
       toast('success', 'Contato salvo com sucesso!', 5000);

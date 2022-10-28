@@ -1,4 +1,5 @@
 import { backendBaseUrl } from './api';
+import ContactMapper from './mappers/ContactMapper';
 import HttpClient from './utils'
 
 class ContactsService {
@@ -26,13 +27,13 @@ class ContactsService {
 
   async createContact(contact){
     return this.httpClient.post(`/contacts`, {
-      body: contact
+      body: ContactMapper.toPersistence(contact)
     });
   }
 
   async editContact(contactId, contact){
     return this.httpClient.put(`/contacts/${contactId}`, {
-      body: contact
+      body: ContactMapper.toPersistence(contact)
     });
   }
 
