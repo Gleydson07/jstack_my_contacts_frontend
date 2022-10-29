@@ -2,7 +2,7 @@ class ContactMapper {
   toPersistence(domainContact) {
     return {
       name: domainContact.name,
-      email: domainContact.email,
+      email: domainContact.email.toLowerCase(),
       phone: domainContact.phone,
       category_id: domainContact.categoryId
     };
@@ -10,10 +10,12 @@ class ContactMapper {
 
   toDomain(persistenceContact) {
     return {
+      id: persistenceContact.id,
       name: persistenceContact.name,
       email: persistenceContact.email,
       phone: persistenceContact.phone,
-      categoryId: persistenceContact.category_id
+      categoryId: persistenceContact.category_id,
+      categoryName: persistenceContact.category_name
     };
   };
 }

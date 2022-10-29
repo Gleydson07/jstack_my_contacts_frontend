@@ -97,7 +97,7 @@ export const ContactForm = forwardRef(({
       setName(contact.name ?? '');
       setEmail(contact.email ?? '');
       setPhone(contact.phone ?? '');
-      setSocialMedia(contact.category_id ?? '');
+      setSocialMedia(contact.categoryId ?? '');
     },
 
     resetFields: () => {

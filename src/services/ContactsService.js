@@ -8,21 +8,25 @@ class ContactsService {
   }
 
   async listContacts(orderBy = 'asc'){
-    return this.httpClient.get(`/contacts?orderBy=${orderBy ? 'ASC' : 'DESC'}`, {
+    const contacts = await this.httpClient.get(`/contacts?orderBy=${orderBy ? 'ASC' : 'DESC'}`, {
       headers: {
         'Authorization': 'Token',
         'Auth': 'Auth2',
       }
     });
+
+    return contacts.map(item => ContactMapper.toDomain(item));
   }
 
   async findContact(contactId){
-    return this.httpClient.get(`/contacts/${contactId}`, {
+    const contact = await this.httpClient.get(`/contacts/${contactId}`, {
       headers: {
         'Authorization': 'Token',
         'Auth': 'Auth2',
       }
     });
+
+    return ContactMapper.toDomain(contact);
   }
 
   async createContact(contact){

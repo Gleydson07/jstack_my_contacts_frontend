@@ -18,7 +18,7 @@ export const ContactCard = ({contact, onDelete}) => {
       <Wrapper>
         <HeaderContainer>
           <strong>{contact.name}</strong>
-          <small>{contact.category_name}</small>
+          <small>{contact.categoryName}</small>
         </HeaderContainer>
         <p>{contact.email}</p>
         <p>{phoneFormat(contact.phone)}</p>
