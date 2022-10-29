@@ -15,7 +15,9 @@ class ContactsService {
       }
     });
 
-    return contacts.map(item => ContactMapper.toDomain(item));
+    // O retorno abaixo é o mesmo que:
+    // return contacts.map((item) => ContactMapper.toDomain(item));
+    return contacts.map(ContactMapper.toDomain);
   }
 
   async findContact(contactId){
