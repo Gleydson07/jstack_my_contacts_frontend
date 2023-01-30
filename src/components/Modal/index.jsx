@@ -16,8 +16,13 @@ export const Modal = ({
   onCancel,
   confirmLabel = 'Confirmar',
   onConfirm,
-  isLoading
+  isLoading,
+  isOpen
 }) => {
+
+  if (!isOpen) {
+    return <></>;
+  }
 
   return (
     <ReactPortal portalId='portal-modal'>

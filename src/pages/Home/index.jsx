@@ -2,12 +2,14 @@ import React, {  } from 'react';
 import { ContactList } from '../../components/ContactList';
 import { Loader } from '../../components/Loader';
 import { Modal } from '../../components/Modal';
+import { useController } from './useController';
+
+import { InputSearch } from './Components/InputSearch';
+import { Header } from './Components/Header';
 
 import {
-  Container,  
-  InputSearchContainer
+  Container
 } from './styles';
-import { useController } from './useController';
 
 export const Home = () => {
   const {
@@ -30,27 +32,20 @@ export const Home = () => {
   return (
     <Container>
       <Loader isLoading={isLoading}/>
-      {deleteModalIsOpen && 
-        <Modal
-          title={`Tem certeza que deseja remover o contato "${deleteContact?.name}" ?`}
-          confirmLabel="Deletar"
-          isLoading={isLoadingDelete}
-          onCancel={handleCloseDeleteModal}
-          onConfirm={handleDeleteContact}
-          danger
-        >
-          <p>Esta ação não poderá ser desfeita!</p>
-        </Modal>
-      }
 
-      {!hasError && <InputSearchContainer>
-        <input  
-          type="text"
-          placeholder='Pesquisar pelo nome...'
+      {!hasError && 
+        <InputSearch
           value={searchTerm}
           onChange={handleChangeSearchTerm}
         />
-      </InputSearchContainer>}
+      }
+
+      <Header
+        hasError={hasError}
+        hasContacts={!!contacts.length}
+        filteredContactsSize={filteredContacts.length}
+      />
+
       <ContactList 
         contacts={contacts}
         filteredContacts={filteredContacts}
@@ -62,6 +57,18 @@ export const Home = () => {
         toggleOrder={handleToggleContactOrder}
         onDelete={handleOpenModal}
       />
+
+      <Modal
+        title={`Tem certeza que deseja remover o contato "${deleteContact?.name}" ?`}
+        confirmLabel="Deletar"
+        isLoading={isLoadingDelete}
+        onCancel={handleCloseDeleteModal}
+        onConfirm={handleDeleteContact}
+        isOpen={deleteModalIsOpen}
+        danger
+      >
+        <p>Esta ação não poderá ser desfeita!</p>
+      </Modal>
     </Container>
   )
 }

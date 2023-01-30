@@ -1,4 +1,24 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 100%;
+  }
+`;
+
+const scaleIn = keyframes`
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+`;
 
 export const Overlay = styled.div`
   position: fixed;
@@ -11,7 +31,7 @@ export const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  animation: ${fadeIn} 0.3s;
 `;
 
 export const Container = styled.div`
@@ -21,6 +41,7 @@ export const Container = styled.div`
   box-shadow: 8px 4px 10px rgba(0, 0, 0, 0.04);
   max-width: 450px;
   width: 100%;
+  animation: ${scaleIn} 0.3s;
 
   .modal-title{
     font-size: 22px;
