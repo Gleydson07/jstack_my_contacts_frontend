@@ -1,4 +1,5 @@
 import React from 'react';
+import useAnimatedUnmount from '../../hooks/useAnimatedUnmount';
 import { Button } from '../Button';
 import ReactPortal from '../ReactPortal';
 
@@ -19,15 +20,16 @@ export const Modal = ({
   isLoading,
   isOpen
 }) => {
-
-  if (!isOpen) {
-    return <></>;
+  const { shouldRender, animatedElementRef } = useAnimatedUnmount(isOpen);
+  
+  if (!shouldRender) {
+    return <></>
   }
 
   return (
     <ReactPortal portalId='portal-modal'>
-      <Overlay>
-        <Container danger={danger}>
+      <Overlay isLeaving={!isOpen} ref={animatedElementRef}>
+        <Container danger={danger} isLeaving={!isOpen}>
           <h1 className='modal-title'>{title}</h1>
           <div className="modal-body">
             {children}
