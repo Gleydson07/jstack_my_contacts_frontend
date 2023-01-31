@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import xCircleSvg from '../../../assets/images/x-circle.svg';
 import checkCircleSvg from '../../../assets/images/check-circle.svg';
 
@@ -9,12 +9,31 @@ import { useEffect } from 'react';
 
 export const ToastMessage = ({
   message,
-  onRemoveMessage
+  onRemoveMessage,
+  isLeaving,
+  onAnimationEnd
 }) => {
+  const animatedElementRef = useRef(null);
   const {id, type, text, duration} = message;
+  
   const handleRemoveToast = () => {
     onRemoveMessage(id);
   };
+
+  useEffect(() => {      
+    const handleAnimationEnd = () => {
+      onAnimationEnd(id);
+    }
+    
+    const elementRef = animatedElementRef.current;
+    if (isLeaving) {
+      elementRef.addEventListener('animationend', handleAnimationEnd);
+    }
+    
+    return () => {
+      elementRef.removeEventListener('animationend', handleAnimationEnd);
+    }
+  }, [isLeaving, id, onAnimationEnd]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => onRemoveMessage(id), duration || 7000);
@@ -22,7 +41,7 @@ export const ToastMessage = ({
     return () => {
       clearTimeout(timeoutId); 
     }
-  }, [message, onRemoveMessage])
+  }, [message, onRemoveMessage]);
 
   return (
     <Container
@@ -30,6 +49,8 @@ export const ToastMessage = ({
       onClick={handleRemoveToast}
       tabIndex={0}
       role="button"
+      isLeaving={isLeaving}
+      ref={animatedElementRef}
     >
       {type !== 'info' && 
         <img 
